@@ -1,0 +1,57 @@
+.sectionTasks {
+  width: 100%;
+  max-width: 46rem;
+  margin: 5.7rem auto;
+}
+
+.headerTasks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding-bottom: 1.5rem;
+}
+
+.headerTasks span {
+  color: var(--gray-200);
+  background: var(--gray-400);
+  padding: 0.125rem 0.5rem;
+  border-radius: 100%;
+}
+
+.createdTasks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--blue);
+
+}
+
+.completedTasks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--purple);
+}
+
+.withouthTasks {
+  border-top: 1px solid var(--gray-400);
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding-top: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-300);
+}
+
+.withouthTasks img {
+  padding-bottom: 1rem;
+}
+
+.withouthTasks p:first-of-type {
+  font-weight: bold;
+}
