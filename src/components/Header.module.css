@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-nav {
+form {
   position: absolute;
   bottom: -1.625rem;
   display: flex;
@@ -18,7 +18,7 @@ nav {
   gap: 0.5rem;
 }
 
-nav input {
+form input {
   width:39.875rem;
   padding: 1rem;
   border: 1px solid var(--gray-700);
@@ -31,12 +31,12 @@ nav input {
   font-weight: 400;
 }
 
-nav input:focus {
+form input:focus {
   border: 1px solid var(--purple);
   color: var(--gray-100);
 }
 
-nav button {
+form button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,6 +53,44 @@ nav button {
   font-size: 0.875rem;
 }
 
-nav button:hover {
+form button:hover {
   background: var(--blue);
+}
+
+.sectionTasks {
+  width: 100%;
+  max-width: 46rem;
+  margin: 5.7rem auto;
+}
+
+.headerTasks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding-bottom: 0.75rem;
+}
+
+.headerTasks span {
+  color: var(--gray-200);
+  background: var(--gray-400);
+  padding: 0.125rem 0.5rem;
+  border-radius: 8px;
+}
+
+.createdTasks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--blue);
+
+}
+
+.completedTasks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--purple);
 }
