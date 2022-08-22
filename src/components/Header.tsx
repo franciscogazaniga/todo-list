@@ -1,10 +1,10 @@
 import styles from './Header.module.css'
 import {PlusCircle} from 'phosphor-react'
+import { v4 as uuidv4 } from 'uuid';
 
 import LogoImg from '../assets/logo.svg'
 import { Tasks } from './Tasks'
 import { useState } from 'react'
-
 
 export function Header() {
   const [tasks, setTasks] = useState([])
@@ -19,10 +19,16 @@ export function Header() {
 
   const isNewTaskEmpty = newTaskText.length === 0
 
+  const newTask = {
+    id: Math.random() * tasks.length,
+    content: newTaskText,
+    completed: taskCompleted,
+  }
+
   function handleCreateNewTask(event) {
     event.preventDefault()
 
-    setTasks([...tasks, newTaskText]);
+    setTasks([...tasks, newTask]);
     setNewTaskText('')
   }
 
@@ -32,18 +38,39 @@ export function Header() {
     setNewTaskText(event.target.value)
   }
 
-  function deleteTask(taskToDelete: string) {
+  function deleteTask(taskToDelete: number) {
     const tasksWithoutDeletedOne = tasks.filter(task => {
-      return task !== taskToDelete;
+      return task.id !== taskToDelete;
     })
+
+    const taskIndex = tasks.findIndex((task) => {
+      return task.id === taskToDelete;
+    });
+
+    const tempTasks = [...tasks];
+
+    console.log(tempTasks[taskIndex].completed)
+    if(tempTasks[taskIndex].completed) {
+      setSuccessTaskCount(state => {
+        return state - 1
+      })
+    }
 
     setTasks(tasksWithoutDeletedOne);
   }
 
-  function finishTask(taskToComplete: boolean) {
-    setTaskCompleted(taskToComplete)
+  function finishTask(taskToComplete: number) {
+    const taskIndex = tasks.findIndex((task) => {
+      return task.id === taskToComplete;
+    });
 
-    if(taskToComplete) {
+    const tempTasks = [...tasks];
+      
+    tempTasks[taskIndex].completed = !tempTasks[taskIndex].completed;
+
+    setTasks(tempTasks);
+
+    if(tempTasks[taskIndex].completed) {
       setSuccessTaskCount(state => {
         return state + 1
       })
@@ -52,7 +79,6 @@ export function Header() {
         return state - 1
       })
     }
-
   }
 
   return (
@@ -87,12 +113,12 @@ export function Header() {
         {taskCounter != 0 ? tasks.map(task => {
           return (
             <Tasks
-              key={task}
-              content={task}
+              id={task.id}
+              content={task.content}
               onDeleteTask = {deleteTask}
               onFinishTask = {finishTask}
               numberOfTasks = {taskCounter}
-              finished = {taskCompleted}
+              finished = {task.completed}
             />
           )
         }) : 
