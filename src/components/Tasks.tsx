@@ -1,13 +1,11 @@
 import ClipboardIcon from '../assets/clipboard-icon.svg'
 import { CheckCircle, Circle, Trash } from 'phosphor-react'
 import styles from './Tasks.module.css'
-import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 interface TaskProps {
   id: number;
-  content: string;
-  finished: boolean;
+  content?: string;
+  finished?: boolean;
   onDeleteTask: (task: number) => void;
   onFinishTask: (task: number) => void;
   numberOfTasks: number;

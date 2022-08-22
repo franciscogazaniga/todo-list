@@ -1,19 +1,22 @@
 import styles from './Header.module.css'
 import {PlusCircle} from 'phosphor-react'
-import { v4 as uuidv4 } from 'uuid';
 
 import LogoImg from '../assets/logo.svg'
 import { Tasks } from './Tasks'
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
+
+interface Task {
+  id: number;
+  content: string;
+  completed: boolean
+}
 
 export function Header() {
-  const [tasks, setTasks] = useState([])
+  const [tasks, setTasks] = useState<Task[]>([])
 
   const [newTaskText, setNewTaskText] = useState('')
 
   const [successTaskCount, setSuccessTaskCount] = useState(0)
-
-  const [taskCompleted, setTaskCompleted] = useState(false)
 
   const taskCounter = tasks.length
 
@@ -22,17 +25,17 @@ export function Header() {
   const newTask = {
     id: Math.random() * tasks.length,
     content: newTaskText,
-    completed: taskCompleted,
+    completed: false,
   }
 
-  function handleCreateNewTask(event) {
+  function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
 
     setTasks([...tasks, newTask]);
     setNewTaskText('')
   }
 
-  function handleNewTaskChange(event) {
+  function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('')
 
     setNewTaskText(event.target.value)
@@ -123,6 +126,9 @@ export function Header() {
           )
         }) : 
           <Tasks
+            id={0}
+            onDeleteTask = {deleteTask}
+            onFinishTask = {finishTask}
             numberOfTasks = {0}
           />
         }
